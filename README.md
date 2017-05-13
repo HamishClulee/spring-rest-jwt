@@ -3,9 +3,9 @@ A RESTful template using JWT for authentication
 
 ## Dependancies
 
-Java 1.8
-MongoDB
-Maven
+ - Java 1.8
+ - MongoDB
+ - Maven
 
 ## Build
 
