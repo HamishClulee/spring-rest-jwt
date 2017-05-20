@@ -39,10 +39,23 @@
       <artifactId>morphia</artifactId>
       <version>1.3.2</version>
     </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commons.io.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>${jjwt.version}</version>
+    </dependency>
+
   </dependencies>
 
   <properties>
     <java.version>1.8</java.version>
+    <commons.io.version>2.4</commons.io.version>
+    <jjwt.version>0.6.0</jjwt.version>
   </properties>
 
 

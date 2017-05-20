@@ -12,16 +12,17 @@ import java.util.List;
 /**
  * Created by hamish on 10/05/17.
  */
-@CrossOrigin
 @RestController
 public class AuctionController {
 
+    @CrossOrigin
     @RequestMapping(value = "/auctions/{id}")
     public Auction auction(@PathVariable Integer id) throws UnknownHostException {
         Auction auction = AuctionDAO.getAuctionByID(id);
         return new Auction(auction.getId(), auction.getName(), auction.getShortDescription(), auction.getLongDescription(), auction.getImagePath(), auction.getAdditionalInformationLink(), auction.getReserve(), auction.getCurrentAmount(), auction.getStatus(), auction.getDateCreated());
     }
 
+    @CrossOrigin
     @RequestMapping("/auctions")
     public List<Auction> getAll() throws UnknownHostException {
         List<Auction> auctions = AuctionDAO.getAllAuctions();

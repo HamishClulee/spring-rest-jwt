@@ -25,18 +25,23 @@ public class UserDAO extends MongoConnection{
         getConnection().save(user);
     }
 
-    public static User getUserByUserName(String username) throws UnknownHostException {
-        return getConnection().get(User.class, username);
+    public static User getUserByEmail(String email) throws UnknownHostException {
+        return getConnection().get(User.class, email);
     }
 
     public static void deleteAllUsers() throws UnknownHostException{
 
         for(User user : getAllUsers()) {
-            getConnection().delete(User.class, user.getUsername());
+            getConnection().delete(User.class, user.getEmail());
         }
     }
 
-
+    public static boolean checkUserExisits(String email) throws UnknownHostException {
+        if(getConnection().get(User.class, email) != null){
+            return true;
+        }
+        return false;
+    }
 
     public static void updateUserDetails(String userNameToBeUpdated, User updatedUser) throws UnknownHostException{
         Datastore ds = getConnection();

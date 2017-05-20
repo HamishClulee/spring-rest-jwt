@@ -2,7 +2,6 @@ package application.user;
 
 import org.mongodb.morphia.annotations.Id;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,24 +10,26 @@ import java.util.Date;
 public class User {
 
     @Id
-    private String username;
+    private String email;
     private String firstName;
     private String lastName;
     private String address;
     private Date dateCreated;
     private String password;
+    private String role;
 
     public User(){
 
     }
 
-    public User(String username, String firstName, String lastName, String address, Date dateCreated, String password) {
-        this.username = username;
+    public User(String email, String firstName, String lastName, String address, Date dateCreated, String password, String role) {
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.dateCreated = dateCreated;
         this.password = password;
+        this.role = role;
     }
 
     public String getFirstName() {
@@ -63,12 +64,12 @@ public class User {
         this.dateCreated = dateCreated;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -77,5 +78,26 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

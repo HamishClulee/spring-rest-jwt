@@ -160,7 +160,7 @@ public class Auction {
     public String toString() {
         return "Auction{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", username='" + name + '\'' +
                 ", shortDescription='" + shortDescription + '\'' +
                 ", longDescription='" + longDescription + '\'' +
                 ", imagePath='" + imagePath + '\'' +
