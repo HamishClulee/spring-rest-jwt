@@ -38,7 +38,7 @@ public class JwtFilter extends GenericFilterBean {
             request.setAttribute("claims", claims);
         }
         catch (Exception e) {
-            throw new ServletException("Invalid token.");
+            throw new ServletException("Invalid token. I WAS HERE");
         }
 
         chain.doFilter(req, res);
