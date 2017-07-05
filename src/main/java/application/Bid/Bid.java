@@ -7,6 +7,10 @@ public class Bid {
 
     private String id;
 
+    public Bid(){
+
+    }
+
     public Bid (String id) {
         this.id = id;
     }
@@ -14,4 +18,6 @@ public class Bid {
     public String getId() {
         return id;
     }
+
+
 }

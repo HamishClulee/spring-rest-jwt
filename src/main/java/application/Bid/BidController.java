@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 public class BidController {
 
     @MessageMapping("/bid")
-    @SendTo("/bidresponse")
+    @SendTo("/allBids/bidresponse")
     public BidResponse response(Bid bid) throws Exception {
         System.out.println("BID RECEIVED: ###################### :::: " + bid.getId());
         return new BidResponse("Bid ok, bid id: " + bid.getId() + "!");
