@@ -6,12 +6,14 @@ package application.Bid;
 public class Bid {
 
     private String id;
+    private Integer auctionId;
 
     public Bid(){
 
     }
 
-    public Bid (String id) {
+    public Bid (String id, Integer auctionId) {
+        this.auctionId = auctionId;
         this.id = id;
     }
 
@@ -19,5 +21,7 @@ public class Bid {
         return id;
     }
 
-
+    public Integer getAuctionId() {
+        return auctionId;
+    }
 }

@@ -1,5 +1,6 @@
 package application.Bid;
 
+import dao.AuctionDAO;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -10,10 +11,16 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class BidController {
 
+    private Integer count = 0;
+
     @MessageMapping("/bid")
     @SendTo("/allBids/bidresponse")
     public BidResponse response(Bid bid) throws Exception {
-        System.out.println("BID RECEIVED: ###################### :::: " + bid.getId());
+        AuctionDAO.makeBid(bid.getAuctionId());
+        count++;
+        if(count % 10 == 0){
+            System.out.println("Should fire every 10 ids's " + AuctionDAO.getAuctionByID(bid.getAuctionId()).getCurrentAmount().toString());
+        }
         return new BidResponse("Bid ok, bid id: " + bid.getId() + "!");
     }
 }

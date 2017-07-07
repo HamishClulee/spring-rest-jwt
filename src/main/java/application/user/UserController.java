@@ -23,7 +23,7 @@ public class UserController {
     @RequestMapping(value = "/users/{username}")
     public User user(@PathVariable String email) throws UnknownHostException {
         User user = UserDAO.getUserByEmail(email);
-        return new User(user.getEmail(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getDateCreated(), user.getPassword(), user.getRole());
+        return new User(user.getEmail(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getDateCreated(), user.getPassword(), user.getRole(), user.getAccountBalance(), user.getTotalBidsMade());
     }
 
     @CrossOrigin
@@ -64,7 +64,7 @@ public class UserController {
 
         return new LoginResponse(Jwts.builder().setSubject(login.email)
                 .claim("roles", UserDAO.getUserByEmail(login.email)).setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, "SECRET_KEY_NEEDS_UPDATING_EH_BRO").compact(), user.getEmail(), user.getRole(),  message);
+                .signWith(SignatureAlgorithm.HS256, "SECRET_KEY_NEEDS_UPDATING_EH_BRO").compact(), user.getEmail(), user.getRole(), user.getAccountBalance(), user.getTotalBidsMade(), message);
     }
 
     private static class UserLogin {
@@ -82,11 +82,15 @@ public class UserController {
         public String token;
         public String email;
         public String role;
+        public Integer userAccountBalance;
+        public Integer totalBidsMade;
         public String message;
-        public LoginResponse(final String token, final String email, final String role, final String message) {
+        public LoginResponse(final String token, final String email, final String role, final Integer userAccountBalance, final Integer totalBidsMade,final String message) {
             this.token = token;
             this.email = email;
             this.role = role;
+            this.userAccountBalance = userAccountBalance;
+            this.totalBidsMade = totalBidsMade;
             this.message = message;
         }
     }

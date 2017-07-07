@@ -15,11 +15,11 @@ import java.util.List;
 public class PopulateMongo {
 
     public static void main(String[] args) throws UnknownHostException {
-        User user1 = new User("hamish@hamish.com", "Hamish", "Clulee", "123 Fake Street", new Date(), "hamish", "admin");
-        User user2 = new User("james@james.com", "James", "Gooodman", "123 Fake Street", new Date(), "james", "admin");
-        User user3 = new User("max@max.com", "Max", "TheMaddest", "123 Fake Street", new Date(), "max", "user");
-        User user4 = new User("joe@joe.com", "Joe", "Cooper", "123 Fake Street", new Date(), "joe", "user");
-        User user5 = new User("a", "test", "test", "123 Fake Street", new Date(), "a", "super-admin");
+        User user1 = new User("hamish@hamish.com", "Hamish", "Clulee", "123 Fake Street", new Date(), "hamish", "admin", 100, 20);
+        User user2 = new User("james@james.com", "James", "Gooodman", "123 Fake Street", new Date(), "james", "admin", 300, 43);
+        User user3 = new User("max@max.com", "Max", "TheMaddest", "123 Fake Street", new Date(), "max", "user", 300, 23);
+        User user4 = new User("joe@joe.com", "Joe", "Cooper", "123 Fake Street", new Date(), "joe", "user", 500, 45);
+        User user5 = new User("a", "test", "test", "123 Fake Street", new Date(), "a", "super-admin", 99999, 63);
 
 
         UserDAO.deleteAllUsers();

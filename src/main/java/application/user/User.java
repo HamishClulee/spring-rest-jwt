@@ -17,12 +17,14 @@ public class User {
     private Date dateCreated;
     private String password;
     private String role;
+    private Integer accountBalance;
+    private Integer totalBidsMade;
 
     public User(){
 
     }
 
-    public User(String email, String firstName, String lastName, String address, Date dateCreated, String password, String role) {
+    public User(String email, String firstName, String lastName, String address, Date dateCreated, String password, String role, Integer accountBalance, Integer totalBidsMade) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,6 +32,24 @@ public class User {
         this.dateCreated = dateCreated;
         this.password = password;
         this.role = role;
+        this.accountBalance = accountBalance;
+        this.totalBidsMade = totalBidsMade;
+    }
+
+    public Integer getTotalBidsMade() {
+        return totalBidsMade;
+    }
+
+    public void setTotalBidsMade(Integer totalBidsMade) {
+        this.totalBidsMade = totalBidsMade;
+    }
+
+    public Integer getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(Integer accountBalance) {
+        this.accountBalance = accountBalance;
     }
 
     public String getFirstName() {

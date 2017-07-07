@@ -6,6 +6,8 @@ import java.util.List;
 
 import application.auction.Auction;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.query.UpdateOperations;
+import org.mongodb.morphia.query.UpdateOperator;
 
 /**
  * Created by hamish on 9/05/17.
@@ -37,6 +39,12 @@ public class AuctionDAO extends MongoConnection{
         Datastore ds = getConnection();
         ds.delete(Auction.class, AuctionIDToBeUpdated);
         ds.save(updatedAuction);
+    }
+
+    public static void makeBid(Integer id) throws UnknownHostException {
+        Datastore ds = getConnection();
+        UpdateOperations ops = ds.createUpdateOperations(Auction.class).inc("currentAmount");
+        ds.update(getConnection().get(Auction.class, id), ops);
     }
     
 }
