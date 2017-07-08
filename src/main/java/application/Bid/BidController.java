@@ -20,6 +20,7 @@ public class BidController {
         Auction auction = AuctionDAO.bidReturnAuction(bid.getAuctionId());
         // determine if winner
         Boolean isWinningBid = auction.getCurrentAmount().equals(auction.getReserve()) ? true : false;
+        if(isWinningBid) AuctionDAO.closeAuction(bid.getAuctionId());
         return new BidResponse(auction.getCurrentAmount(), isWinningBid);
     }
 }

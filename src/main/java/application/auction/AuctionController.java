@@ -28,4 +28,18 @@ public class AuctionController {
         List<Auction> auctions = AuctionDAO.getAllAuctions();
         return auctions;
     }
+
+    @CrossOrigin
+    @RequestMapping("/auctionWinners")
+    public List<AuctionWinner> getAllWinners() throws UnknownHostException {
+        List<AuctionWinner> auctionsWinners = AuctionDAO.getAllAuctionWinners();
+        return auctionsWinners;
+    }
+
+    @CrossOrigin
+    @RequestMapping("/closedAuctions")
+    public List<ClosedAuction> getAllClosedAuctions() throws UnknownHostException {
+        List<ClosedAuction> closedAuctions = AuctionDAO.getAllClosedAuctions();
+        return closedAuctions;
+    }
 }

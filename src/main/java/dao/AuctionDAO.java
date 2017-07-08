@@ -1,8 +1,13 @@
 package dao;
 
+import application.Bid.Bid;
+import application.auction.AuctionWinner;
+import application.auction.ClosedAuction;
 import com.mongodb.MongoClient;
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import application.auction.Auction;
 import org.mongodb.morphia.Datastore;
@@ -46,5 +51,46 @@ public class AuctionDAO extends MongoConnection{
         ds.update(getConnection().get(Auction.class, id), ops);
         return getConnection().get(Auction.class, id);
     }
-    
+
+    public static void closeAuction(Integer auctionId) throws UnknownHostException {
+        // get it into memory
+        Auction auction = getConnection().get(Auction.class, auctionId);
+        // delete it from the active table
+        getConnection().delete(Auction.class, auctionId);
+        // create the ClosedAuction with the finished auction details
+        ClosedAuction closedAuction = new ClosedAuction(auctionId, auction.getName(), auction.getReserve(), new Date());
+        // save the ClosedAuction
+        getConnection().save(closedAuction);
+        // Filter the bids table for all the bids that relate to the closed auction
+        List<Bid> auctionBids = BidDAO.getAllBids().stream().filter(b -> b.getAuctionId().equals(auctionId)).collect(Collectors.toList());
+        // create a new auction winner using the reserve of the closed auction as the index in the bids list
+        getConnection().save(new AuctionWinner(auctionId, auctionBids.get(auction.getReserve() - 1).getUserEmail()));
+    }
+
+    public static List<AuctionWinner> getAllAuctionWinners() throws UnknownHostException {
+        return getConnection().createQuery(AuctionWinner.class).asList();
+    }
+
+    public static List<ClosedAuction> getAllClosedAuctions() throws UnknownHostException {
+        return getConnection().createQuery(ClosedAuction.class).asList();
+    }
+
+    // ------- DROP ALL ENTRIES FROM TESTING TABLES ------------------ //
+    public static void drop_Bids_Winners_Closed() throws UnknownHostException {
+        dropBidTable();
+        dropWinnersTable();
+        dropClosedAuctionsTable();
+    }
+
+    public static void dropBidTable() throws UnknownHostException {
+        getConnection().getCollection(Bid.class).drop();
+    }
+
+    public static void dropWinnersTable() throws UnknownHostException {
+        getConnection().getCollection(AuctionWinner.class).drop();
+    }
+
+    public static void dropClosedAuctionsTable() throws UnknownHostException {
+        getConnection().getCollection(ClosedAuction.class).drop();
+    }
 }
