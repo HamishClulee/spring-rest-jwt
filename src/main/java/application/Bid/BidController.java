@@ -1,5 +1,6 @@
 package application.Bid;
 
+import application.auction.Auction;
 import dao.AuctionDAO;
 import dao.BidDAO;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class BidController {
 
-    private Integer count = 0;
-
     @MessageMapping("/bid")
-    @SendTo("/allBids/bidresponse")
+    @SendTo("/allBids/bidResponse")
     public BidResponse response(Bid bid) throws Exception {
-        AuctionDAO.makeBid(bid.getAuctionId());
         BidDAO.saveBid(bid);
-        return new BidResponse(bid.getId());
+        Auction auction = AuctionDAO.bidReturnAuction(bid.getAuctionId());
+        // determine if winner
+        Boolean isWinningBid = auction.getCurrentAmount().equals(auction.getReserve()) ? true : false;
+        return new BidResponse(auction.getCurrentAmount(), isWinningBid);
     }
 }

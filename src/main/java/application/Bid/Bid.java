@@ -11,15 +11,25 @@ public class Bid {
     private String id;
     private Integer auctionId;
     private String userEmail;
+    private String timeStamp;
 
     public Bid(){
 
     }
 
-    public Bid (String id, Integer auctionId, String userEmail) {
-        this.auctionId = auctionId;
+    public Bid(String id, Integer auctionId, String userEmail, String timeStamp) {
         this.id = id;
+        this.auctionId = auctionId;
         this.userEmail = userEmail;
+        this.timeStamp = timeStamp;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public String getId() {
@@ -55,7 +65,8 @@ public class Bid {
 
         if (id != null ? !id.equals(bid.id) : bid.id != null) return false;
         if (auctionId != null ? !auctionId.equals(bid.auctionId) : bid.auctionId != null) return false;
-        return userEmail != null ? userEmail.equals(bid.userEmail) : bid.userEmail == null;
+        if (userEmail != null ? !userEmail.equals(bid.userEmail) : bid.userEmail != null) return false;
+        return timeStamp != null ? timeStamp.equals(bid.timeStamp) : bid.timeStamp == null;
     }
 
     @Override
@@ -63,6 +74,17 @@ public class Bid {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (auctionId != null ? auctionId.hashCode() : 0);
         result = 31 * result + (userEmail != null ? userEmail.hashCode() : 0);
+        result = 31 * result + (timeStamp != null ? timeStamp.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Bid{" +
+                "id='" + id + '\'' +
+                ", auctionId=" + auctionId +
+                ", userEmail='" + userEmail + '\'' +
+                ", timeStamp='" + timeStamp + '\'' +
+                '}';
     }
 }
