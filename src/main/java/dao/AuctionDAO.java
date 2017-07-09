@@ -3,6 +3,7 @@ package dao;
 import application.Bid.Bid;
 import application.auction.AuctionWinner;
 import application.auction.ClosedAuction;
+import application.user.User;
 import com.mongodb.MongoClient;
 import java.net.UnknownHostException;
 import java.util.Date;
@@ -45,15 +46,20 @@ public class AuctionDAO extends MongoConnection{
         ds.save(updatedAuction);
     }
 
-    public static Auction bidReturnAuction(Integer id) throws UnknownHostException {
+    public static Auction bidReturnAuction(Integer id, String userEmail) throws UnknownHostException {
         Datastore ds = getConnection();
-        UpdateOperations ops = ds.createUpdateOperations(Auction.class).inc("currentAmount");
-        ds.update(getConnection().get(Auction.class, id), ops);
+        // increment the auction current amount
+        UpdateOperations incAmount = ds.createUpdateOperations(Auction.class).inc("currentAmount");
+        ds.update(getConnection().get(Auction.class, id), incAmount);
+        // decrement the users account balance
+        UpdateOperations decBalance = ds.createUpdateOperations(User.class).dec("accountBalance");
+        ds.update(getConnection().get(User.class, userEmail), decBalance);
+        // return the auction
         return getConnection().get(Auction.class, id);
     }
 
-    public static void closeAuction(Integer auctionId) throws UnknownHostException {
-        // get it into memory
+    public static void winningBidRecieved(Integer auctionId) throws UnknownHostException {
+        // get the auction that is completed into memory
         Auction auction = getConnection().get(Auction.class, auctionId);
         // delete it from the active table
         getConnection().delete(Auction.class, auctionId);
@@ -61,7 +67,8 @@ public class AuctionDAO extends MongoConnection{
         ClosedAuction closedAuction = new ClosedAuction(auctionId, auction.getName(), auction.getReserve(), new Date());
         // save the ClosedAuction
         getConnection().save(closedAuction);
-        // Filter the bids table for all the bids that relate to the closed auction
+        // ---------- DETERMINE THE WINNER OF THE AUCTION ------------- //
+        // Filter the bids table for all the bids that relate to the completed auction
         List<Bid> auctionBids = BidDAO.getAllBids().stream().filter(b -> b.getAuctionId().equals(auctionId)).collect(Collectors.toList());
         // create a new auction winner using the reserve of the closed auction as the index in the bids list
         getConnection().save(new AuctionWinner(auctionId, auctionBids.get(auction.getReserve() - 1).getUserEmail()));

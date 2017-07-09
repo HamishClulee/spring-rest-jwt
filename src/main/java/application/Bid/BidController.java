@@ -17,10 +17,12 @@ public class BidController {
     @SendTo("/allBids/bidResponse")
     public BidResponse response(Bid bid) throws Exception {
         BidDAO.saveBid(bid);
-        Auction auction = AuctionDAO.bidReturnAuction(bid.getAuctionId());
+        // increment currentAmount decrement user balance
+        Auction auction = AuctionDAO.bidReturnAuction(bid.getAuctionId(), bid.getUserEmail());
         // determine if winner
-        Boolean isWinningBid = auction.getCurrentAmount().equals(auction.getReserve()) ? true : false;
-        if(isWinningBid) AuctionDAO.closeAuction(bid.getAuctionId());
+        Boolean isWinningBid = auction.getCurrentAmount().equals(auction.getReserve());
+        if(isWinningBid) AuctionDAO.winningBidRecieved(bid.getAuctionId());
+        // Thread.sleep(5000);
         return new BidResponse(auction.getCurrentAmount(), isWinningBid);
     }
 }
