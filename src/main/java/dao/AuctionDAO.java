@@ -69,7 +69,7 @@ public class AuctionDAO extends MongoConnection{
         getConnection().save(closedAuction);
         // ---------- DETERMINE THE WINNER OF THE AUCTION ------------- //
         // Filter the bids table for all the bids that relate to the completed auction
-        List<Bid> auctionBids = BidDAO.getAllBids().stream().filter(b -> b.getAuctionId().equals(auctionId)).collect(Collectors.toList());
+        List<Bid> auctionBids = BidDAO.allBidsByAuctionId(auctionId);
         // create a new auction winner using the reserve of the closed auction as the index in the bids list
         getConnection().save(new AuctionWinner(auctionId, auctionBids.get(auction.getReserve() - 1).getUserEmail()));
     }
@@ -81,6 +81,7 @@ public class AuctionDAO extends MongoConnection{
     public static List<ClosedAuction> getAllClosedAuctions() throws UnknownHostException {
         return getConnection().createQuery(ClosedAuction.class).asList();
     }
+
 
     // ------- DROP ALL ENTRIES FROM TESTING TABLES ------------------ //
     public static void drop_Bids_Winners_Closed() throws UnknownHostException {

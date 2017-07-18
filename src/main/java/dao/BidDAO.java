@@ -6,6 +6,7 @@ import org.mongodb.morphia.Datastore;
 
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static dao.MongoConnection.morphia;
 
@@ -25,5 +26,13 @@ public class BidDAO {
 
     public static List<Bid> getAllBids() throws UnknownHostException {
         return getConnection().createQuery(Bid.class).asList();
+    }
+
+    public static  List<Bid> allBidsByAuctionId(Integer auctionId) throws UnknownHostException {
+        return getAllBids().stream().filter(b -> b.getAuctionId().equals(auctionId)).collect(Collectors.toList());
+    }
+
+    public static List<Bid> allBidsByAuctionIdAndUserId(Integer auctionId, String email) throws UnknownHostException{
+        return allBidsByAuctionId(auctionId).stream().filter(b -> b.getUserEmail().equals(email)).collect(Collectors.toList());
     }
 }

@@ -1,6 +1,8 @@
 package application.auction;
 
+import application.Bid.Bid;
 import dao.AuctionDAO;
+import dao.BidDAO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,28 +20,42 @@ public class AuctionController {
     @CrossOrigin
     @RequestMapping(value = "/auctions/{id}")
     public Auction auction(@PathVariable Integer id) throws UnknownHostException {
-        Auction auction = AuctionDAO.getAuctionByID(id);
-        return new Auction(auction.getId(), auction.getName(), auction.getShortDescription(), auction.getLongDescription(), auction.getImagePath(), auction.getAdditionalInformationLink(), auction.getReserve(), auction.getCurrentAmount(), auction.getStatus(), auction.getDateCreated());
+        return AuctionDAO.getAuctionByID(id);
     }
 
     @CrossOrigin
     @RequestMapping("/auctions")
     public List<Auction> getAll() throws UnknownHostException {
-        List<Auction> auctions = AuctionDAO.getAllAuctions();
-        return auctions;
+        return AuctionDAO.getAllAuctions();
     }
 
     @CrossOrigin
-    @RequestMapping("/auctionWinners")
+    @RequestMapping("/auctionwinners")
     public List<AuctionWinner> getAllWinners() throws UnknownHostException {
-        List<AuctionWinner> auctionsWinners = AuctionDAO.getAllAuctionWinners();
-        return auctionsWinners;
+        return AuctionDAO.getAllAuctionWinners();
     }
 
     @CrossOrigin
-    @RequestMapping("/closedAuctions")
+    @RequestMapping("/closedauctions")
     public List<ClosedAuction> getAllClosedAuctions() throws UnknownHostException {
-        List<ClosedAuction> closedAuctions = AuctionDAO.getAllClosedAuctions();
-        return closedAuctions;
+        return AuctionDAO.getAllClosedAuctions();
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/restallbids/{auctionid}")
+    public List<Bid> bidsByAuction(@PathVariable Integer auctionid) throws UnknownHostException {
+        return BidDAO.allBidsByAuctionId(auctionid);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/restallbids/{auctionid}/{email}")
+    public List<Bid> getAllBidsByAuctionByUser(@PathVariable Integer auctionid, @PathVariable String email) throws UnknownHostException {
+        return BidDAO.allBidsByAuctionIdAndUserId(auctionid, email);
+    }
+
+    @CrossOrigin
+    @RequestMapping("/restallbids")
+    public List<Bid> getAllBids() throws UnknownHostException {
+        return BidDAO.getAllBids();
     }
 }

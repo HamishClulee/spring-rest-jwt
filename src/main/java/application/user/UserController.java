@@ -22,21 +22,17 @@ public class UserController {
     @CrossOrigin
     @RequestMapping(value = "/users/{username}")
     public User user(@PathVariable String email) throws UnknownHostException {
-        User user = UserDAO.getUserByEmail(email);
-        return new User(user.getEmail(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getDateCreated(), user.getPassword(), user.getRole(), user.getAccountBalance(), user.getTotalBidsMade());
+        return UserDAO.getUserByEmail(email);
     }
 
     @CrossOrigin
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public ResponseEntity<User> newUser(@RequestBody User user) throws UnknownHostException {
-        System.out.println(user.toString());
         user.setDateCreated(new Date());
         UserDAO.addNewUser(user);
         User tested = UserDAO.getUserByEmail(user.getEmail());
         return new ResponseEntity<User>(tested == null ? HttpStatus.EXPECTATION_FAILED : HttpStatus.OK);
     }
-
-
 
     @CrossOrigin
     @RequestMapping(value = "/login", method = RequestMethod.POST)
