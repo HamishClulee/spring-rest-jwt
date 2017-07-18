@@ -12,16 +12,26 @@ public class Bid {
     private Integer auctionId;
     private String userEmail;
     private String timeStamp;
+    private Integer currentAmount;
 
     public Bid(){
 
     }
 
-    public Bid(String id, Integer auctionId, String userEmail, String timeStamp) {
+    public Bid(String id, Integer auctionId, String userEmail, String timeStamp, Integer currentAmount) {
         this.id = id;
         this.auctionId = auctionId;
         this.userEmail = userEmail;
         this.timeStamp = timeStamp;
+        this.currentAmount = currentAmount;
+    }
+
+    public Integer getCurrentAmount() {
+        return currentAmount;
+    }
+
+    public void setCurrentAmount(Integer currentAmount) {
+        this.currentAmount = currentAmount;
     }
 
     public String getTimeStamp() {
@@ -66,7 +76,8 @@ public class Bid {
         if (id != null ? !id.equals(bid.id) : bid.id != null) return false;
         if (auctionId != null ? !auctionId.equals(bid.auctionId) : bid.auctionId != null) return false;
         if (userEmail != null ? !userEmail.equals(bid.userEmail) : bid.userEmail != null) return false;
-        return timeStamp != null ? timeStamp.equals(bid.timeStamp) : bid.timeStamp == null;
+        if (timeStamp != null ? !timeStamp.equals(bid.timeStamp) : bid.timeStamp != null) return false;
+        return currentAmount != null ? currentAmount.equals(bid.currentAmount) : bid.currentAmount == null;
     }
 
     @Override
@@ -75,6 +86,7 @@ public class Bid {
         result = 31 * result + (auctionId != null ? auctionId.hashCode() : 0);
         result = 31 * result + (userEmail != null ? userEmail.hashCode() : 0);
         result = 31 * result + (timeStamp != null ? timeStamp.hashCode() : 0);
+        result = 31 * result + (currentAmount != null ? currentAmount.hashCode() : 0);
         return result;
     }
 
@@ -85,6 +97,7 @@ public class Bid {
                 ", auctionId=" + auctionId +
                 ", userEmail='" + userEmail + '\'' +
                 ", timeStamp='" + timeStamp + '\'' +
+                ", currentAmount=" + currentAmount +
                 '}';
     }
 }

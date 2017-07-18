@@ -33,9 +33,7 @@ public class BidResponse {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         BidResponse that = (BidResponse) o;
-
         if (updatedCurrentAmount != null ? !updatedCurrentAmount.equals(that.updatedCurrentAmount) : that.updatedCurrentAmount != null)
             return false;
         return winner != null ? winner.equals(that.winner) : that.winner == null;

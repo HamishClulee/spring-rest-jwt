@@ -23,9 +23,11 @@ public class BidController {
     @MessageMapping("/bid")
     @SendTo("/allBids/bidResponse")
     public BidResponse response(Bid bid) throws Exception {
-        BidDAO.saveBid(bid);
+
         // increment currentAmount decrement user balance
         Auction auction = AuctionDAO.bidReturnAuction(bid.getAuctionId(), bid.getUserEmail());
+        bid.setCurrentAmount(auction.getCurrentAmount());
+        BidDAO.saveBid(bid);
         // determine if winner
         Boolean isWinningBid = auction.getCurrentAmount().equals(auction.getReserve());
         if(isWinningBid) AuctionDAO.winningBidRecieved(bid.getAuctionId());
