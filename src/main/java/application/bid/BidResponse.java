@@ -1,4 +1,4 @@
-package application.Bid;
+package application.bid;
 
 /**
  * Created by hamish on 2/07/17.

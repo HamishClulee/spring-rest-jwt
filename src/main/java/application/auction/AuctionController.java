@@ -1,6 +1,6 @@
 package application.auction;
 
-import application.Bid.Bid;
+import application.bid.Bid;
 import dao.AuctionDAO;
 import dao.BidDAO;
 import org.springframework.web.bind.annotation.CrossOrigin;

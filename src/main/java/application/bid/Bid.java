@@ -1,4 +1,4 @@
-package application.Bid;
+package application.bid;
 
 import org.mongodb.morphia.annotations.Id;
 

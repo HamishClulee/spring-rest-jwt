@@ -1,6 +1,6 @@
 package dao;
 
-import application.Bid.Bid;
+import application.bid.Bid;
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;
 

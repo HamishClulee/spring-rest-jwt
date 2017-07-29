@@ -1,6 +1,6 @@
 package dao;
 
-import application.Bid.Bid;
+import application.bid.Bid;
 import application.auction.AuctionWinner;
 import application.auction.ClosedAuction;
 import application.user.User;
@@ -8,7 +8,6 @@ import com.mongodb.MongoClient;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import application.auction.Auction;
 import org.mongodb.morphia.Datastore;
