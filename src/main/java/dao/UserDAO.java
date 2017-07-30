@@ -48,4 +48,8 @@ public class UserDAO extends MongoConnection{
         ds.delete(User.class, userNameToBeUpdated);
         ds.save(updatedUser);
     }
+
+    public static Boolean isOuOfFunds(String userEmail) throws UnknownHostException{
+        return UserDAO.getUserByEmail(userEmail).getAccountBalance() > 0 ? false : true;
+    }
 }

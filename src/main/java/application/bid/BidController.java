@@ -1,23 +1,21 @@
 package application.bid;
 
 import application.auction.Auction;
-import application.mail.Mail;
 import dao.AuctionDAO;
 import dao.BidDAO;
+import dao.UserDAO;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
+import org.springframework.stereotype.Controller;
 
 /**
  * Created by hamish on 2/07/17.
  */
-@RestController
+@Controller
 public class BidController {
 
     @MessageMapping("/bid")
-    @SendTo("/allBids/bidResponse")
+    @SendTo("/bids/bidResponse")
     public BidResponse response(Bid bid) throws Exception {
         // increment currentAmount decrement user balance
         Auction auction = AuctionDAO.bidReturnAuction(bid.getAuctionId(), bid.getUserEmail());
@@ -25,12 +23,12 @@ public class BidController {
         BidDAO.saveBid(bid);
         // determine if winner
         Boolean isWinningBid = auction.getCurrentAmount().equals(auction.getReserve());
+        // check user balance
+        Boolean isOutOfBalance = UserDAO.isOuOfFunds(bid.getUserEmail());
         if(isWinningBid){
             AuctionDAO.winningBidRecieved(bid.getAuctionId());
-            Mail mail = new Mail(bid.getUserEmail(), "You've just won an auction for " + auction.getName(), new Date(), "Lorem Ipsum bally wog reference carrots tell john hes a dingus", "winning bid");
         }
-
-        return new BidResponse(auction.getCurrentAmount(), isWinningBid); // bids in last day bids in last hour etc
+        return new BidResponse(auction.getCurrentAmount(), isWinningBid, isOutOfBalance); // bids in last day bids in last hour etc
     }
 
 

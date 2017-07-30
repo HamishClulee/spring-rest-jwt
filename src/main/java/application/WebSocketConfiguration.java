@@ -17,13 +17,13 @@ public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfig
 
         @Override
         public void configureMessageBroker(MessageBrokerRegistry config) {
-            config.enableSimpleBroker("/allBids");
+            config.enableSimpleBroker("/bids", "/userMail");
             config.setApplicationDestinationPrefixes("/app");
         }
 
         @Override
         public void registerStompEndpoints(StompEndpointRegistry registry) {
-            registry.addEndpoint("/startBidding").setAllowedOrigins("*").withSockJS();
+            registry.addEndpoint("/userLoggedIn").setAllowedOrigins("*").withSockJS();
         }
 }
 
