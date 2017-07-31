@@ -28,10 +28,10 @@ public class PopulateMongo {
         UserDAO.addNewUser(user4);
         UserDAO.addNewUser(user5);
 
-        Auction auction7 = new Auction(7, "POLLING WORKS BRO", "A really really mean toothbrush bro, this shit is da bomb", "A really really mean toothbrush bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 100, 0, 1, new Date());
-        Auction auction8 = new Auction(8, "Hey James, You're Cool", "A really really mean toothbrush bro, this shit is da bomb", "A really really mean toothbrush bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 100, 0, 1, new Date());
-        Auction auction1 = new Auction(1, "Mean Television", "A really really mean television bro, this shit is da bomb", "A really really mean television bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 100, 0, 1, new Date());
-        Auction auction2 = new Auction(2, "Mean Car", "A really really mean car bro, this shit is da bomb", "A really really mean television bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 20, 0, 1, new Date());
+        Auction auction7 = new Auction(7, "POLLING WORKS BRO", "A really really mean toothbrush bro, this shit is da bomb", "A really really mean toothbrush bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 10, 0, 1, new Date());
+        Auction auction8 = new Auction(8, "Hey James, You're Cool", "A really really mean toothbrush bro, this shit is da bomb", "A really really mean toothbrush bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 10, 0, 1, new Date());
+        Auction auction1 = new Auction(1, "Mean Television", "A really really mean television bro, this shit is da bomb", "A really really mean television bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 10, 0, 1, new Date());
+        Auction auction2 = new Auction(2, "Mean Car", "A really really mean car bro, this shit is da bomb", "A really really mean television bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 2, 0, 1, new Date());
         Auction auction3 = new Auction(3, "Mean as Dog", "A really really mean dog bro, this shit is da bomb", "A really really mean television bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 400, 395, 2, new Date());
         Auction auction4 = new Auction(4, "Mean Sandwich", "A really really mean sandwich bro, this shit is da bomb", "A really really mean television bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 400, 395, 2, new Date());
         Auction auction5 = new Auction(5, "Mean Used Pencil", "A really really mean used pencil bro, this shit is da bomb", "A really really mean television bro, this shit is da bomb", "/assets/tele.jpg", "https://google.com", 400, 395, 3, new Date());
