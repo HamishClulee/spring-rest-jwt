@@ -39,7 +39,7 @@ public class BidController {
             AuctionDAO.winningBidRecieved(bid.getAuctionId());
             // create the Mail for the db and http calls and the summary for the websockets response
             MailSummary summary = new MailSummary(new Date(), "You've Won an Auction!!", "You won an auction for " + auction.getName(), false, bid.getUserEmail());
-            Mail mail = new Mail(Utils.generateMailId(), summary, "You've just won an auction. \nCongrats, we're getting your item ready to send to you right now...");
+            Mail mail = new Mail(Utils.generateMailId(), bid.getUserEmail(), summary, "You've just won an auction. \nCongrats, we're getting your item ready to send to you right now...", false);
             // save mail to the db
             MailDAO.saveMail(mail);
             return new BidResponse(auction.getCurrentAmount(), isWinningBid, isOutOfBalance, isAuctionClosed, summary);

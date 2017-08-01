@@ -32,6 +32,6 @@ public class MailDAO {
     }
 
     public static List<Mail> getAllMailForUser(String userId) throws UnknownHostException {
-        return getAllMail().stream().filter(b -> b.getMailSummary().getUserId().equals(userId)).collect(Collectors.toList() );
+        return getAllMail().stream().filter(b -> b.getMailSummary().getUserId().equals(userId)).collect(Collectors.toList());
     }
 }

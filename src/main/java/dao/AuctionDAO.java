@@ -1,5 +1,6 @@
 package dao;
 
+import application.Mail.Mail;
 import application.bid.Bid;
 import application.auction.AuctionWinner;
 import application.auction.ClosedAuction;
@@ -99,5 +100,9 @@ public class AuctionDAO extends MongoConnection{
 
     public static void dropClosedAuctionsTable() throws UnknownHostException {
         getConnection().getCollection(ClosedAuction.class).drop();
+    }
+
+    public static void dropMailTable() throws UnknownHostException {
+        getConnection().getCollection(Mail.class).drop();
     }
 }

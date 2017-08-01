@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public class Utils {
 
-    public static UUID generateMailId(){
-        return UUID.randomUUID();
+    public static String generateMailId(){
+        return UUID.randomUUID().toString();
     }
 }
