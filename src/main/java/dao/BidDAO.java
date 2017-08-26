@@ -35,4 +35,5 @@ public class BidDAO {
     public static List<Bid> allBidsByAuctionIdAndUserId(Integer auctionId, String email) throws UnknownHostException{
         return allBidsByAuctionId(auctionId).stream().filter(b -> b.getUserEmail().equals(email)).collect(Collectors.toList());
     }
+
 }

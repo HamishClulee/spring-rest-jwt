@@ -22,7 +22,7 @@ public class PopulateMongo {
 
     public static void main(String[] args) throws UnknownHostException {
         User user1 = new User("hamish@hamish.com", "Hamish", "Clulee", "123 Fake Street",
-                new Date(), "hamish", "admin", 2, 20000);
+                new Date(), "hamish", "admin", 999, 20000);
         User user2 = new User("james@james.com", "James", "Gooodman", "123 Fake Street",
                 new Date(), "james", "admin", 10000, 43);
         User user3 = new User("max@max.com", "Max", "TheMaddest", "123 Fake Street",
@@ -41,13 +41,13 @@ public class PopulateMongo {
 
         Auction auction7 = new Auction(7, "POLLING WORKS BRO", "A really really mean toothbrush bro, this shit is da bomb",
                 "A really really mean toothbrush bro, this shit is da bomb", "/assets/tele.jpg",
-                "https://google.com", 10, 0, 1, new Date());
+                "https://google.com", 100, 0, 1, new Date());
         Auction auction8 = new Auction(8, "Hey James, You're Cool", "A really really mean toothbrush bro, this shit is da bomb",
                 "A really really mean toothbrush bro, this shit is da bomb", "/assets/tele.jpg",
-                "https://google.com", 10, 0, 1, new Date());
+                "https://google.com", 100, 0, 1, new Date());
         Auction auction1 = new Auction(1, "Mean Television", "A really really mean television bro, this shit is da bomb",
                 "A really really mean television bro, this shit is da bomb", "/assets/tele.jpg",
-                "https://google.com", 10, 0, 1, new Date());
+                "https://google.com", 100, 0, 1, new Date());
         Auction auction2 = new Auction(2, "Mean Car", "A really really mean car bro, this shit is da bomb",
                 "A really really mean television bro, this shit is da bomb", "/assets/tele.jpg",
                 "https://google.com", 2, 0, 1, new Date());

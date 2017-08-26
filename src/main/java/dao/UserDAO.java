@@ -17,6 +17,13 @@ public class UserDAO extends MongoConnection{
         return morphia.createDatastore(new MongoClient(uri), "dev");
     }
 
+    public static Integer addFunds(String email, Integer add) throws UnknownHostException {
+        User user = getUserByEmail(email);
+        user.setAccountBalance(user.getAccountBalance() + add);
+        getConnection().save(user);
+        return user.getAccountBalance() + add;
+    }
+
     public static List<User> getAllUsers() throws UnknownHostException {
         return getConnection().createQuery(User.class).asList();
     }

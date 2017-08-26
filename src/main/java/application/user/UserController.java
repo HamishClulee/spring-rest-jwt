@@ -20,6 +20,13 @@ import java.util.List;
 public class UserController {
 
     @CrossOrigin
+    @RequestMapping(value = "/addfunds", method = RequestMethod.POST)
+    public AddBalanceResponse addFunds(@RequestBody final AddBalance add) throws ServletException, UnknownHostException {
+        Integer updatedBalance = UserDAO.addFunds(add.getEmail(), add.getAdd());
+        return new AddBalanceResponse(updatedBalance.toString());
+    }
+
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}")
     public User user(@PathVariable String email) throws UnknownHostException {
         return UserDAO.getUserByEmail(email);
@@ -88,6 +95,51 @@ public class UserController {
             this.userAccountBalance = userAccountBalance;
             this.totalBidsMade = totalBidsMade;
             this.message = message;
+        }
+    }
+
+    private static class AddBalanceResponse {
+        String updatedBalance;
+
+        public String getUpdatedBalance() {
+            return updatedBalance;
+        }
+
+        public void setUpdatedBalance(String updatedBalance) {
+            this.updatedBalance = updatedBalance;
+        }
+
+        public AddBalanceResponse(final String updatedBalance){
+            this.updatedBalance = updatedBalance;
+        }
+    }
+
+    private static class AddBalance {
+        public Integer add;
+        public String email;
+
+        public Integer getAdd() {
+            return add;
+        }
+
+        public void setAdd(Integer add) {
+            this.add = add;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        @Override
+        public String toString() {
+            return "AddBalance{" +
+                    "add=" + add +
+                    ", email='" + email + '\'' +
+                    '}';
         }
     }
 }

@@ -10,6 +10,7 @@ public class Bid {
     @Id
     private String id;
     private Integer auctionId;
+    private String auctionName;
     private String userEmail;
     private String timeStamp;
     private Integer currentAmount;
@@ -18,12 +19,21 @@ public class Bid {
 
     }
 
-    public Bid(String id, Integer auctionId, String userEmail, String timeStamp, Integer currentAmount) {
+    public Bid(String id, Integer auctionId, String auctionName, String userEmail, String timeStamp, Integer currentAmount) {
         this.id = id;
         this.auctionId = auctionId;
+        this.auctionName = auctionName;
         this.userEmail = userEmail;
         this.timeStamp = timeStamp;
         this.currentAmount = currentAmount;
+    }
+
+    public String getAuctionName() {
+        return auctionName;
+    }
+
+    public void setAuctionName(String auctionName) {
+        this.auctionName = auctionName;
     }
 
     public Integer getCurrentAmount() {
@@ -75,6 +85,7 @@ public class Bid {
 
         if (id != null ? !id.equals(bid.id) : bid.id != null) return false;
         if (auctionId != null ? !auctionId.equals(bid.auctionId) : bid.auctionId != null) return false;
+        if (auctionName != null ? !auctionName.equals(bid.auctionName) : bid.auctionName != null) return false;
         if (userEmail != null ? !userEmail.equals(bid.userEmail) : bid.userEmail != null) return false;
         if (timeStamp != null ? !timeStamp.equals(bid.timeStamp) : bid.timeStamp != null) return false;
         return currentAmount != null ? currentAmount.equals(bid.currentAmount) : bid.currentAmount == null;
@@ -84,6 +95,7 @@ public class Bid {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (auctionId != null ? auctionId.hashCode() : 0);
+        result = 31 * result + (auctionName != null ? auctionName.hashCode() : 0);
         result = 31 * result + (userEmail != null ? userEmail.hashCode() : 0);
         result = 31 * result + (timeStamp != null ? timeStamp.hashCode() : 0);
         result = 31 * result + (currentAmount != null ? currentAmount.hashCode() : 0);
@@ -95,6 +107,7 @@ public class Bid {
         return "Bid{" +
                 "id='" + id + '\'' +
                 ", auctionId=" + auctionId +
+                ", auctionName='" + auctionName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", timeStamp='" + timeStamp + '\'' +
                 ", currentAmount=" + currentAmount +
